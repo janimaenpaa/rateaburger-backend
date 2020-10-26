@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  BaseEntity,
+} from "typeorm"
 import { User } from "./User"
 
 export enum Star {
@@ -10,7 +16,7 @@ export enum Star {
 }
 
 @Entity()
-export class Review {
+export class Review extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 

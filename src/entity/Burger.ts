@@ -3,6 +3,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
+  BaseEntity,
 } from "typeorm"
 import { Restaurant } from "./Restaurant"
 
@@ -14,7 +15,7 @@ export enum Patty {
 }
 
 @Entity()
-export class Burger {
+export class Burger extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 

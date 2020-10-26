@@ -5,12 +5,13 @@ import {
   OneToOne,
   JoinColumn,
   OneToMany,
+  BaseEntity,
 } from "typeorm"
 import { Burger } from "./Burger"
 import { RestaurantCoordinates } from "./RestaurantCoordinates"
 
 @Entity()
-export class Restaurant {
+export class Restaurant extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
