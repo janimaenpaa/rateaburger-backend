@@ -4,7 +4,9 @@ import {
   Column,
   BaseEntity,
   OneToMany,
+  BeforeInsert,
 } from "typeorm"
+import bcrypt from "bcrypt"
 import { Review } from "./Review"
 
 @Entity()
@@ -26,4 +28,13 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Review, (review) => review.user)
   reviews: Review[]
+
+  async setPassword(newPassword: string) {
+    this.password = await bcrypt.hash(newPassword, 10)
+  }
+
+  @BeforeInsert()
+  async encryptPassword() {
+    this.password = await bcrypt.hash(this.password, 10)
+  }
 }
