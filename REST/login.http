@@ -1,0 +1,8 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Y2Q2ODMxZjFhY2I0ZjBiNjkxYzRlZjYiLCJpYXQiOjE1NTc1NjIxNDMsImV4cCI6MTU1NzkyMjE0M30.BP7n27AVY9MKTz1ViHMJWOVqQGMktJmT8AJWrZuQoP0
+@login = { "email": "matti.meikalainen4@abc.com", "password": "password" }
+
+### Login user and get token
+POST  http://localhost:5000/api/login
+content-type: application/json
+
+{{login}}

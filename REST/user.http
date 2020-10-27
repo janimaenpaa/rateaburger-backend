@@ -1,8 +1,13 @@
 ### Variables
-@user = { "email": "matti.meikalainen2@abc.com", "firstName": "Matti", "lastName": "Meikäläinen", "password": "password"}
+@user = { "email": "matti.meikalainen4@abc.com", "firstName": "Matti", "lastName": "Meikäläinen", "password": "password"}
+
 
 ### Register user given their email, first name, last name and password, returns the token upon successful registration
 POST  http://localhost:5000/api/users
 content-type: application/json
 
 {{user}}
+
+### Delete user by id
+DELETE http://localhost:5000/api/users/286d5efd-f153-4677-af33-086347535c00
+content-type: application/json
