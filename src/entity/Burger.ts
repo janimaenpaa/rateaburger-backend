@@ -4,8 +4,10 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   BaseEntity,
+  OneToMany,
 } from "typeorm"
 import { Restaurant } from "./Restaurant"
+import { Review } from "./Review"
 
 export enum Patty {
   Beef = "beef",
@@ -30,4 +32,7 @@ export class Burger extends BaseEntity {
 
   @ManyToOne(() => Restaurant, (restaurant) => restaurant.burgers)
   restaurant: Restaurant
+
+  @OneToMany(() => Review, (review) => review.burger)
+  reviews: Review
 }

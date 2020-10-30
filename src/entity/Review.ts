@@ -5,6 +5,7 @@ import {
   ManyToOne,
   BaseEntity,
 } from "typeorm"
+import { Burger } from "./Burger"
 import { User } from "./User"
 
 export enum Star {
@@ -26,6 +27,12 @@ export class Review extends BaseEntity {
   @Column({ type: "enum", enum: Star, default: Star.Five })
   stars: Star
 
+  @Column("timestamp")
+  time: Date
+
   @ManyToOne(() => User, (user) => user.reviews)
   user: User
+
+  @ManyToOne(() => Burger, (burger) => burger.reviews)
+  burger: Burger
 }
