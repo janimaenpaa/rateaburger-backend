@@ -21,7 +21,7 @@ export class Restaurant extends BaseEntity {
   @Column()
   address: string
 
-  @Column()
+  @Column({ nullable: true })
   imgUrl: string
 
   @OneToOne(

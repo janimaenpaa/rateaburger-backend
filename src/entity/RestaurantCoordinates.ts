@@ -13,10 +13,10 @@ export class RestaurantCoordinates {
   id: number
 
   @Column("decimal")
-  longitude: number
+  latitude: number
 
   @Column("decimal")
-  latitude: number
+  longitude: number
 
   @OneToOne(() => Restaurant, (restaurant) => restaurant.coordinates)
   @JoinColumn()
