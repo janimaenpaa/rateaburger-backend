@@ -1,10 +1,12 @@
 import "dotenv/config"
 import express from "express"
 import { createConnection } from "typeorm"
+
 import userRouter from "./routes/users"
 import restaurantRouter from "./routes/restaurants"
 import reviewRouter from "./routes/reviews"
 import loginRouter from "./routes/login"
+import burgerRouter from "./routes/burgers"
 
 const PORT = process.env.PORT || 3001
 
@@ -16,6 +18,7 @@ createConnection().then(() => {
   app.use("/api/restaurants", restaurantRouter)
   app.use("/api/reviews", reviewRouter)
   app.use("/api/login", loginRouter)
+  app.use("/api/burgers", burgerRouter)
 
   app.listen(PORT, () => console.log(`Connected to port: ${PORT}`))
 })

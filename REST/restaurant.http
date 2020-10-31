@@ -1,0 +1,15 @@
+### Variables
+@restaurant = {"name": "Treffipub", "address": "Hiihtomäentie 14", "coordinates": { "latitude": 60.195366, "longitude": 25.030701 } }
+
+### Get Restaurants
+GET http://localhost:5000/api/restaurants
+
+### Register user given their email, first name, last name and password, returns the token upon successful registration
+POST  http://localhost:5000/api/restaurants
+content-type: application/json
+
+{{{{restaurant}}}}
+
+### Delete user by id
+DELETE http://localhost:5000/api/restaurants/:id
+content-type: application/json
