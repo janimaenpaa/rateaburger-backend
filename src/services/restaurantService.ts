@@ -23,6 +23,20 @@ export class RestaurantService {
     return Promise.reject(false)
   }
 
+  async getByName(name: string): Promise<Restaurant | undefined> {
+    const restaurant = await this.restaurantRepository.find({
+      where: {
+        name: name,
+      },
+    })
+
+    if (restaurant && restaurant.length > 0) {
+      return restaurant[0]
+    }
+
+    return undefined
+  }
+
   async add(Restaurant: Restaurant): Promise<Restaurant> {
     const newRestaurant = this.restaurantRepository.create(Restaurant)
     return await this.restaurantRepository.save(newRestaurant)
