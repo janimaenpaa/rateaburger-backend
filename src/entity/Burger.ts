@@ -18,8 +18,8 @@ export enum Patty {
 
 @Entity()
 export class Burger extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number
+  @PrimaryGeneratedColumn("uuid")
+  id: string
 
   @Column("varchar", { length: 255 })
   name: string

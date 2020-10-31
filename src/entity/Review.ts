@@ -18,8 +18,8 @@ export enum Star {
 
 @Entity()
 export class Review extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number
+  @PrimaryGeneratedColumn("uuid")
+  id: string
 
   @Column("varchar", { length: 600 })
   description: string

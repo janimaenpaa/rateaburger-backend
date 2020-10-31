@@ -12,8 +12,8 @@ import { RestaurantCoordinates } from "./RestaurantCoordinates"
 
 @Entity()
 export class Restaurant extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number
+  @PrimaryGeneratedColumn("uuid")
+  id: string
 
   @Column({ unique: true })
   name: string
