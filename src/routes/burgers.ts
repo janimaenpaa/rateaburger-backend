@@ -1,8 +1,10 @@
 import * as express from "express"
-import { Request, Response } from "express"
+import { Request, Response, NextFunction } from "express"
 import { getRepository } from "typeorm"
 import { Burger } from "../entity/Burger"
 import { BurgerService } from "../services/burgerService"
+import { RestaurantService } from "../services/restaurantService"
+import HttpStatus from "http-status-codes"
 
 const router = express.Router()
 
@@ -18,11 +20,31 @@ router.get("/:id", async (req: Request, res: Response) => {
   return res.send(results)
 })
 
-router.post("/", async (req: Request, res: Response) => {
-  const burgerRepository = getRepository(Burger)
-  const restaurant = await burgerRepository.create(req.body)
-  const results = await burgerRepository.save(restaurant)
-  return res.send(results)
+router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+  const burgerService = new BurgerService()
+  const restaurantService = new RestaurantService()
+
+  const restaurant = await restaurantService.getByName(req.body.restaurant)
+
+  if (!restaurant) {
+    return res
+      .status(HttpStatus.BAD_REQUEST)
+      .json({ message: "Restaurant not found or the field is missing" })
+  }
+
+  const burger = {
+    ...req.body,
+    restaurant: restaurant,
+  }
+
+  const newBurger = await burgerService.instantiate(burger)
+
+  try {
+    const response = await burgerService.add(newBurger)
+    return res.status(HttpStatus.OK).json({ ...response })
+  } catch (error) {
+    return next(error)
+  }
 })
 
 router.put("/:id", async (req: Request, res: Response) => {

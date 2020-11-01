@@ -37,19 +37,19 @@ router.post(
         .getRepository(RestaurantCoordinates)
         .save(restaurantCoordinates)
 
-      const newRestaurant = {
+      const restaurant = {
         name: req.body.name,
         address: req.body.address,
         coordinates: restaurantCoordinates,
       }
 
-      const restaurant = await restaurantService.instantiate(newRestaurant)
+      const newRestaurant = await restaurantService.instantiate(restaurant)
 
       try {
-        const response = await restaurantService.add(restaurant)
+        const response = await restaurantService.add(newRestaurant)
         return res.status(HttpStatus.OK).json({ ...response })
       } catch (error) {
-        next(error)
+        return next(error)
       }
     }
 
