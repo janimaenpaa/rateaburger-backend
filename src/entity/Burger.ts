@@ -27,7 +27,7 @@ export class Burger extends BaseEntity {
   @Column({ type: "enum", enum: Patty, default: Patty.Beef })
   patty: Patty
 
-  @Column("text")
+  @Column("text", { nullable: true })
   imgUrl: string
 
   @ManyToOne(() => Restaurant, (restaurant) => restaurant.burgers)
