@@ -10,6 +10,6 @@ content-type: application/json
 
 {{{{restaurant}}}}
 
-### Delete user by id
+### Delete restaurant by id
 DELETE http://localhost:5000/api/restaurants/:id
 content-type: application/json

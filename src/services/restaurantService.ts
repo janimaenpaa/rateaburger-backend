@@ -13,7 +13,7 @@ export class RestaurantService {
   }
 
   async getAll(): Promise<Restaurant[]> {
-    return await this.restaurantRepository.find()
+    return await this.restaurantRepository.find({ relations: ["coordinates"] })
   }
 
   async getById(id: string): Promise<Restaurant> {

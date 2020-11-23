@@ -1,6 +1,7 @@
 import "dotenv/config"
 import express from "express"
 import { createConnection } from "typeorm"
+import cors from "cors"
 
 import userRouter from "./routes/users"
 import restaurantRouter from "./routes/restaurants"
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 3001
 createConnection().then(() => {
   const app = express()
   app.use(express.json())
+  app.use(cors())
 
   app.use("/api/users", userRouter)
   app.use("/api/restaurants", restaurantRouter)

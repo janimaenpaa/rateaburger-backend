@@ -10,8 +10,8 @@ import { RestaurantCoordinates } from "../entity/RestaurantCoordinates"
 const router = express.Router()
 
 router.get("/", async (_req: Request, res: Response) => {
-  const restaurantRepository = getRepository(Restaurant)
-  const restaurants = await restaurantRepository.find()
+  const restaurantService = new RestaurantService()
+  const restaurants = await restaurantService.getAll()
   return res.json(restaurants)
 })
 
@@ -33,7 +33,7 @@ router.post(
       const restaurantCoordinates = new RestaurantCoordinates()
       restaurantCoordinates.latitude = req.body.coordinates.latitude
       restaurantCoordinates.longitude = req.body.coordinates.longitude
-      await getManager()
+      const savedCoordinates = await getManager()
         .getRepository(RestaurantCoordinates)
         .save(restaurantCoordinates)
 
@@ -47,6 +47,11 @@ router.post(
 
       try {
         const response = await restaurantService.add(newRestaurant)
+        savedCoordinates.restaurant = response
+        await getManager()
+          .getRepository(RestaurantCoordinates)
+          .save(savedCoordinates)
+
         return res.status(HttpStatus.OK).json({ ...response })
       } catch (error) {
         return next(error)
