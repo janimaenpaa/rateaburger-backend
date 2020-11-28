@@ -12,7 +12,7 @@ module.exports = {
       rejectUnauthorized: false,
     },
   },
-  entities: ["src/entity/**/*.ts"],
+  entities: ["dist/entity/*.js"],
   migrations: ["src/migration/**/*.ts"],
   subscribers: ["src/subscriber/**/*.ts"],
   cli: {
