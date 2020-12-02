@@ -39,7 +39,9 @@ router.post(
 
       const restaurant = {
         name: req.body.name,
+        description: req.body.description,
         address: req.body.address,
+        imgUrl: req.body.imgUrl,
         coordinates: restaurantCoordinates,
       }
 
@@ -73,9 +75,9 @@ router.put("/:id", async (req: Request, res: Response) => {
 })
 
 router.delete("/:id", async (req: Request, res: Response) => {
-  const restaurantRepository = getRepository(Restaurant)
-  const results = await restaurantRepository.delete(req.params.id)
-  return res.send(results)
+  const restaurantService = new RestaurantService()
+  const result = await restaurantService.delete(req.params.id)
+  return res.send(result)
 })
 
 export default router

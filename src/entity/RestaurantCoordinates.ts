@@ -18,7 +18,9 @@ export class RestaurantCoordinates {
   @Column("decimal")
   longitude: number
 
-  @OneToOne(() => Restaurant, (restaurant) => restaurant.coordinates)
+  @OneToOne(() => Restaurant, (restaurant) => restaurant.coordinates, {
+    onDelete: "CASCADE",
+  })
   @JoinColumn()
   restaurant: Restaurant
 }

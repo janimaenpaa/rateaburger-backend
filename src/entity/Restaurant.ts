@@ -15,10 +15,10 @@ export class Restaurant extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column({ unique: true, nullable: true })
+  @Column({ unique: true })
   name: string
 
-  @Column("varchar", { length: 500 })
+  @Column()
   description: string
 
   @Column()
@@ -29,7 +29,8 @@ export class Restaurant extends BaseEntity {
 
   @OneToOne(
     () => RestaurantCoordinates,
-    (coordinates) => coordinates.restaurant
+    (coordinates) => coordinates.restaurant,
+    { eager: true, onDelete: "CASCADE" }
   )
   @JoinColumn()
   coordinates: RestaurantCoordinates
