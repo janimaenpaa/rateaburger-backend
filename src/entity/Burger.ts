@@ -24,6 +24,9 @@ export class Burger extends BaseEntity {
   @Column("varchar", { length: 255 })
   name: string
 
+  @Column("varchar", { length: 500, nullable: true })
+  description: string
+
   @Column({ type: "enum", enum: Patty, default: Patty.Beef })
   patty: Patty
 

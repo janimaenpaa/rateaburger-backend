@@ -15,8 +15,11 @@ export class Restaurant extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   name: string
+
+  @Column("varchar", { length: 500 })
+  description: string
 
   @Column()
   address: string
