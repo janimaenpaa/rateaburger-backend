@@ -24,8 +24,8 @@ export class Review extends BaseEntity {
   @Column("varchar", { length: 600 })
   description: string
 
-  @Column({ type: "enum", enum: Star, default: Star.Five })
-  stars: Star
+  @Column()
+  stars: number
 
   @Column("timestamp")
   date: Date

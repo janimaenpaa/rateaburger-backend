@@ -13,7 +13,9 @@ export class BurgerService {
   }
 
   async getAll(): Promise<Burger[]> {
-    return await this.burgerRepository.find({ relations: ["restaurant"] })
+    return await this.burgerRepository.find({
+      relations: ["restaurant", "reviews"],
+    })
   }
 
   async getById(id: string): Promise<Burger> {
