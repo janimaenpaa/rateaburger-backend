@@ -13,7 +13,7 @@ export class ReviewService {
   }
 
   async getAll(): Promise<Review[]> {
-    return await this.reviewRepository.find()
+    return await this.reviewRepository.find({ relations: ["user"] })
   }
 
   async getById(id: string): Promise<Review> {

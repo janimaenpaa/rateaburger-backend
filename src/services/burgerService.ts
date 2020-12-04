@@ -14,7 +14,7 @@ export class BurgerService {
 
   async getAll(): Promise<Burger[]> {
     return await this.burgerRepository.find({
-      relations: ["restaurant", "reviews"],
+      relations: ["restaurant", "reviews", "reviews.user"],
     })
   }
 

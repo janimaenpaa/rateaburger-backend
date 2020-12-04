@@ -23,7 +23,7 @@ export class User extends BaseEntity {
   @Column("varchar", { length: 55 })
   lastName: string
 
-  @Column("text")
+  @Column("text", { select: false })
   password: string
 
   @OneToMany(() => Review, (review) => review.user)
