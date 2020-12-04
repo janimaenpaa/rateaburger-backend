@@ -42,6 +42,7 @@ router.post(
         description: req.body.description,
         address: req.body.address,
         imgUrl: req.body.imgUrl,
+        date: new Date(),
         coordinates: restaurantCoordinates,
       }
 

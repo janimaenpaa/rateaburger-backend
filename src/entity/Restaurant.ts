@@ -27,6 +27,9 @@ export class Restaurant extends BaseEntity {
   @Column({ nullable: true })
   imgUrl: string
 
+  @Column("timestamp")
+  date: Date
+
   @OneToOne(
     () => RestaurantCoordinates,
     (coordinates) => coordinates.restaurant,

@@ -33,6 +33,9 @@ export class Burger extends BaseEntity {
   @Column("text", { nullable: true })
   imgUrl: string
 
+  @Column("timestamp")
+  date: Date
+
   @ManyToOne(() => Restaurant, (restaurant) => restaurant.burgers)
   restaurant: Restaurant
 

@@ -34,6 +34,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
   const burger = {
     ...req.body,
+    date: new Date(),
     restaurant: restaurant,
   }
 

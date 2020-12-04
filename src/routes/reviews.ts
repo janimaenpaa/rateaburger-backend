@@ -37,7 +37,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
   const review = {
     ...req.body,
-    time: new Date(),
+    date: new Date(),
     burger: burger,
   }
 
