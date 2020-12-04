@@ -6,6 +6,7 @@ import { BurgerService } from "../services/burgerService"
 //import { UserService } from "../services/userService"
 import HttpStatus from "http-status-codes"
 import { ReviewService } from "../services/reviewService"
+import { UserService } from "../services/userService"
 
 const router = express.Router()
 
@@ -23,10 +24,10 @@ router.get("/:id", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const burgerService = new BurgerService()
-  //const userService = new UserService()
+  const userService = new UserService()
   const reviewService = new ReviewService()
 
-  //const user = await userService.getById(req.body.user)
+  const user = await userService.getById(req.body.user)
   const burger = await burgerService.getById(req.body.burger)
 
   if (!burger) {
@@ -38,6 +39,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const review = {
     ...req.body,
     date: new Date(),
+    user: user,
     burger: burger,
   }
 
