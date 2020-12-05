@@ -12,10 +12,11 @@ module.exports = {
       rejectUnauthorized: false,
     },
   },
+  // This needed when using npm run dev
+  // entities: ["src/entity/**/*.ts"],
+  
   // This needed when using npm start
   entities: ["dist/entity/*.js"],
-  // This needed when using npm run dev
-  //entities: ["src/entity/**/*.ts"],
   migrations: ["src/migration/**/*.ts"],
   subscribers: ["src/subscriber/**/*.ts"],
   cli: {

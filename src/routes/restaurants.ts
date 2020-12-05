@@ -1,4 +1,6 @@
+import "dotenv/config"
 import * as express from "express"
+import fetch from "node-fetch"
 import { Request, Response, NextFunction } from "express"
 import { getRepository, getManager } from "typeorm"
 import { Restaurant } from "../entity/Restaurant"
@@ -21,6 +23,11 @@ router.get("/:id", async (req: Request, res: Response) => {
   return res.send(results)
 })
 
+/* interface fetchedCoordinates {
+  latitude: number
+  longitude: number
+} */
+
 router.post(
   "/",
   [body("name").isLength({ min: 1 }), body("address").isLength({ min: 5 })],
@@ -29,18 +36,31 @@ router.post(
 
     if (validationErrors.isEmpty()) {
       const restaurantService = new RestaurantService()
+      const address = req.body.address
+
+      const fetchCoordinatesByAddress = await fetch(
+        `http://api.positionstack.com/v1/forward?access_key=${process.env.API_KEY}&country=FI&region=Uusimaa&query=${address}`
+      )
+      const fetchResponse = await fetchCoordinatesByAddress.json()
+
+      if (fetchResponse.data.length === 0) {
+        return res.status(404).json({ message: "Address not found" })
+      }
+
+      const coordinates = fetchResponse.data[0]
 
       const restaurantCoordinates = new RestaurantCoordinates()
-      restaurantCoordinates.latitude = req.body.coordinates.latitude
-      restaurantCoordinates.longitude = req.body.coordinates.longitude
-      const savedCoordinates = await getManager()
-        .getRepository(RestaurantCoordinates)
-        .save(restaurantCoordinates)
+      restaurantCoordinates.latitude = coordinates.latitude
+      restaurantCoordinates.longitude = coordinates.longitude
+
+      const savedCoordinates = await getRepository(RestaurantCoordinates).save(
+        restaurantCoordinates
+      )
 
       const restaurant = {
         name: req.body.name,
         description: req.body.description,
-        address: req.body.address,
+        address: address,
         imgUrl: req.body.imgUrl,
         date: new Date(),
         coordinates: restaurantCoordinates,
