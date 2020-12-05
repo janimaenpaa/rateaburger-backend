@@ -14,7 +14,7 @@ module.exports = {
   },
   // This needed when using npm run dev
   // entities: ["src/entity/**/*.ts"],
-  
+
   // This needed when using npm start
   entities: ["dist/entity/*.js"],
   migrations: ["src/migration/**/*.ts"],

@@ -8,6 +8,7 @@ import restaurantRouter from "./routes/restaurants"
 import reviewRouter from "./routes/reviews"
 import loginRouter from "./routes/login"
 import burgerRouter from "./routes/burgers"
+import uploadRouter from "./routes/upload"
 
 const PORT = process.env.PORT || 3001
 
@@ -21,6 +22,7 @@ createConnection().then(() => {
   app.use("/api/reviews", reviewRouter)
   app.use("/api/login", loginRouter)
   app.use("/api/burgers", burgerRouter)
+  app.use("/api/upload", uploadRouter)
 
   app.listen(PORT, () => console.log(`Connected to port: ${PORT}`))
 })
