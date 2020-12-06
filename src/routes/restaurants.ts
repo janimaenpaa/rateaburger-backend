@@ -57,11 +57,16 @@ router.post(
         restaurantCoordinates
       )
 
+      const noImgUrl =
+        "https://rateaburger.s3.eu-north-1.amazonaws.com/7164666a-a1f0-494a-a9c0-bb669f2d0195"
+
+      const imgUrl = req.body.imgUrl
+
       const restaurant = {
         name: req.body.name,
         description: req.body.description,
         address: address,
-        imgUrl: req.body.imgUrl,
+        imgUrl: imgUrl ? imgUrl : noImgUrl,
         date: new Date(),
         coordinates: restaurantCoordinates,
       }
