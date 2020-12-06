@@ -38,6 +38,7 @@ router.post(
 
       return res.status(HttpStatus.OK).json({
         token,
+        id: user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
