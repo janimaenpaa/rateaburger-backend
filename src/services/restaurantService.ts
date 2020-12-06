@@ -19,7 +19,7 @@ export class RestaurantService {
 
   async getAll(): Promise<Restaurant[]> {
     return await this.restaurantRepository.find({
-      relations: ["coordinates", "burgers"],
+      relations: ["coordinates", "burgers", "burgers.reviews"],
     })
   }
 
