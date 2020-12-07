@@ -36,7 +36,8 @@ router.post(
 
     if (validationErrors.isEmpty()) {
       const restaurantService = new RestaurantService()
-      const address = req.body.address
+      const address = req.body.address.replace(/ä/g, "a").replace(/ö/g, "o")
+      console.log(address)
 
       const fetchCoordinatesByAddress = await fetch(
         `http://api.positionstack.com/v1/forward?access_key=${process.env.API_KEY}&country=FI&region=Uusimaa&query=${address}`
@@ -65,7 +66,7 @@ router.post(
       const restaurant = {
         name: req.body.name,
         description: req.body.description,
-        address: address,
+        address: req.body.address,
         imgUrl: imgUrl ? imgUrl : noImgUrl,
         date: new Date(),
         coordinates: restaurantCoordinates,
